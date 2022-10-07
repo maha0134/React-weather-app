@@ -13,7 +13,6 @@ function App() {
       navigator.geolocation.getCurrentPosition(success, error);
     }
     function success(position) {
-      console.log(position);
       setPosition(position);
     }
     function error() {

@@ -1,11 +1,12 @@
 form {
-  padding: 4rem 0 2rem;
+  padding: 1.5rem;
   text-align: center;
   display: flex;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
   gap: 1rem;
-  max-width: 20rem;
+  justify-content: flex-end;
+  /* max-width: 20rem; */
   margin: 0 auto;
 }
 
@@ -17,7 +18,7 @@ form button {
 form input {
   padding: 0.5rem;
   border: black solid 0.125rem;
-  width: 100%;
+  width: 15rem;
 }
 
 form button {
@@ -39,4 +40,8 @@ form button:focus {
 .screen-reader-text {
   position: absolute;
   clip-path: polygon(0 0, 0 0.1%, 0.1% 0.1%, 0.1% 0);
+}
+
+form h2 {
+  margin: 0;
 }

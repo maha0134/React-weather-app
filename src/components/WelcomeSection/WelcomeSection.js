@@ -1,3 +1,4 @@
+import "./welcomeSection.css";
 function WelcomeSection() {
   return (
     <div className="welcome">
