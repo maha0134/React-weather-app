@@ -1,13 +1,13 @@
 // 'use strict';
 const BASE_URL = "https://api.openweathermap.org/data/2.5/onecall";
 const API_KEY = "15487eec3e5e8f7846e151279d9bbd6b";
-const DEFAULT_OPTIONS = {
-  coord: {
-    lon: -75.76,
-    lat: 45.35,
-  }, // Algonquin College
-  units: "metric",
-};
+// const DEFAULT_OPTIONS = {
+//   coord: {
+//     lat: 45.35,
+//     lon: -75.76,
+//   }, // Algonquin College
+//   units: "metric",
+// };
 const cache = new Map();
 
 /**
@@ -25,17 +25,20 @@ const cache = new Map();
  * @returns {Object} Forecast results
  * @see https://openweathermap.org/api/one-call-api#data
  */
-export async function getForecast(options) {
-  const { coord, units } = Object.assign({}, DEFAULT_OPTIONS, options);
-  const cacheItem = cache.get(coord);
+export async function getForecast(options, location) {
+  const { coord, units } = options;
+  if (!location) location = "current";
+  const cacheItem = cache.get(location);
   if (cacheItem && !isExpired(cacheItem.current.dt)) {
+    console.log(cache, "returned from cache");
     return cacheItem;
   }
   const forecast = await fetchForecast({
     units,
     coord,
   });
-  cache.set(coord, forecast);
+  cache.set(location, forecast);
+  console.log(cache);
   return forecast;
 
   /**

@@ -14,9 +14,10 @@ function Form({ position }) {
 
   useEffect(() => {
     if (location) {
-      getGeolocation(location)
-        .then((res) => setCoordinates(res))
-        .then(() => setLocation(""));
+      getGeolocation(location).then((res) => {
+        setCoordinates(res);
+      });
+      // .then(() => setLocation(""));
     }
   }, [location]);
 
@@ -34,18 +35,23 @@ function Form({ position }) {
           lat: coordinates.lat,
           lon: coordinates.lon,
         },
+        units: "metric",
       };
-      getForecast(standardCoordinates)
-        .then((res) => setWeatherDetails(res))
-        .then(() => setWeatherFetched(true))
-        .then(() => setIsFetching(false));
+      getForecast(standardCoordinates, location).then((res) => {
+        setWeatherDetails(res);
+        setLocation("");
+        setWeatherFetched(true);
+        setIsFetching(false);
+      });
     }
   }, [coordinates]);
 
   function formSubmitted(ev) {
     ev.preventDefault();
-    setLocation(ev.target[0].value);
-    setIsFetching(true);
+    if (ev.target[0].value) {
+      setLocation(ev.target[0].value);
+      setIsFetching(true);
+    }
   }
 
   return (
@@ -56,7 +62,7 @@ function Form({ position }) {
         <label htmlFor="location" className="screen-reader-text">
           Enter location here
         </label>
-        <button action="submit">Search</button>
+        <button type="submit">Search</button>
       </form>
       {isFetching && <Loader />}
       {!coordinates && <WelcomeSection />}
