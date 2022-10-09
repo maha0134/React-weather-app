@@ -1,0 +1,66 @@
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.25rem;
+}
+form {
+  padding: 1.5rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 1rem;
+  /* background-color: black; */
+  justify-content: flex-end;
+  align-self: flex-end;
+}
+
+form input,
+form button {
+  font-size: 1.75rem;
+}
+
+form input {
+  padding: 0.5rem 1.5rem;
+  border: black solid 0.125rem;
+  border-radius: 5rem;
+  width: 15rem;
+}
+
+form button {
+  padding: 0.35em 0.75em;
+  border-radius: 5rem;
+  box-shadow: inset 0 0 3px;
+  font-weight: bold;
+  background-color: rgba(1, 255, 175);
+  cursor: pointer;
+  border: none;
+  transition: 0.25s linear;
+}
+
+form button:hover,
+form button:focus {
+  background-color: rgb(2, 218, 149);
+}
+
+.screen-reader-text {
+  position: absolute;
+  clip-path: polygon(0 0, 0 0.1%, 0.1% 0.1%, 0.1% 0);
+}
+
+form h2 {
+  margin: 0;
+}
+
+.current-weather {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.current-weather h3,
+.current-weather p {
+  margin: 0;
+}

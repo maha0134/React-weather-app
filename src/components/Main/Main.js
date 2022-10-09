@@ -1,23 +1,23 @@
 import { useState, useEffect } from "react";
-import "./form.css";
+import "./main.css";
 import getGeolocation from "../MapService/MapService";
 import { getForecast } from "../WeatherService/WeatherService";
 import WeatherDetails from "../WeatherDetails/WeatherDetails";
 import WelcomeSection from "../WelcomeSection/WelcomeSection";
 import Loader from "../Loader/Loader";
-function Form({ position }) {
+function Main({ position }) {
   const [location, setLocation] = useState("");
-  const [coordinates, setCoordinates] = useState(position);
+  const [coordinates, setCoordinates] = useState(null);
   const [weatherDetails, setWeatherDetails] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
   const [weatherFetched, setWeatherFetched] = useState(false);
 
   useEffect(() => {
     if (location) {
+      setIsFetching(true);
       getGeolocation(location).then((res) => {
         setCoordinates(res);
       });
-      // .then(() => setLocation(""));
     }
   }, [location]);
 
@@ -29,7 +29,7 @@ function Form({ position }) {
   }, [position]);
 
   useEffect(() => {
-    if (coordinates) {
+    if (coordinates && "lat" in coordinates) {
       const standardCoordinates = {
         coord: {
           lat: coordinates.lat,
@@ -55,7 +55,7 @@ function Form({ position }) {
   }
 
   return (
-    <>
+    <main>
       <form onSubmit={formSubmitted}>
         <h2>Enter a location:</h2>
         <input type="text" id="location" placeholder="Toronto,ON" />
@@ -67,7 +67,7 @@ function Form({ position }) {
       {isFetching && <Loader />}
       {!coordinates && <WelcomeSection />}
       {weatherFetched && <WeatherDetails weatherDetails={weatherDetails} />}
-    </>
+    </main>
   );
 }
-export default Form;
+export default Main;
