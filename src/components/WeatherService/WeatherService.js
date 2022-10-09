@@ -30,6 +30,7 @@ export async function getForecast(options, location) {
   if (!location) location = "current";
   const cacheItem = cache.get(location);
   if (cacheItem && !isExpired(cacheItem.current.dt)) {
+    //TODO remove console
     console.log(cache, "returned from cache");
     return cacheItem;
   }

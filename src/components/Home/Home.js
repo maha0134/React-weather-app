@@ -1,14 +1,30 @@
-import Main from "../Main/Main";
-function Home({ position }) {
-  if (position === null) {
-    return <Main position={position} />;
+// import Main from "../Main/Main";
+// function Home({ position }) {
+//   if (position === null) {
+//     return <Main position={position} />;
+//   } else {
+//     const coords = {
+//       lat: position.coords.latitude,
+//       lon: position.coords.longitude,
+//     };
+//     return <Main position={coords} />;
+//   }
+// }
+function Home({ weatherDetails }) {
+  if (weatherDetails && "lat" in weatherDetails) {
+    console.log(weatherDetails);
+    const { temp, feels_like, sunrise, sunset } = weatherDetails.current;
+    return (
+      <div className="current-weather">
+        <h3>CurrentWeather</h3>
+        <p>Temperature: {temp}</p>
+        <p>Feels like: {feels_like}</p>
+        <p>Sunrise: {sunrise}</p>
+        <p>Sunset: {sunset}</p>
+      </div>
+    );
   } else {
-    const coords = {
-      lat: position.coords.latitude,
-      lon: position.coords.longitude,
-    };
-    return <Main position={coords} />;
+    return <></>;
   }
 }
-
 export default Home;

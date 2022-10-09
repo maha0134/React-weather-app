@@ -2,9 +2,15 @@ import { useState, useEffect } from "react";
 import "./main.css";
 import getGeolocation from "../MapService/MapService";
 import { getForecast } from "../WeatherService/WeatherService";
-import WeatherDetails from "../WeatherDetails/WeatherDetails";
+// import WeatherDetails from "../WeatherDetails/WeatherDetails";
 import WelcomeSection from "../WelcomeSection/WelcomeSection";
 import Loader from "../Loader/Loader";
+
+import { Routes, Route } from "react-router-dom";
+import Home from "../Home/Home";
+import Hourly from "../Hourly/Hourly";
+import Daily from "../Daily/Daily";
+
 function Main({ position }) {
   const [location, setLocation] = useState("");
   const [coordinates, setCoordinates] = useState(null);
@@ -22,8 +28,12 @@ function Main({ position }) {
   }, [location]);
 
   useEffect(() => {
-    if (position && "lat" in position) {
-      setCoordinates(position);
+    if (position && "coords" in position) {
+      const coords = {
+        lat: position.coords.latitude,
+        lon: position.coords.longitude,
+      };
+      setCoordinates(coords);
       setIsFetching(true);
     }
   }, [position]);
@@ -66,7 +76,21 @@ function Main({ position }) {
       </form>
       {isFetching && <Loader />}
       {!coordinates && <WelcomeSection />}
-      {weatherFetched && <WeatherDetails weatherDetails={weatherDetails} />}
+      <Routes>
+        <Route
+          path="/home"
+          element={<Home weatherDetails={weatherDetails} />}
+        />
+        <Route
+          path="/hourly"
+          element={<Hourly weatherDetails={weatherDetails} />}
+        />
+        <Route
+          path="/daily"
+          element={<Daily weatherDetails={weatherDetails} />}
+        />
+      </Routes>
+      {/* {weatherFetched && <WeatherDetails weatherDetails={weatherDetails} />} */}
     </main>
   );
 }
