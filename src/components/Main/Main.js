@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./main.css";
 import getGeolocation from "../MapService/MapService";
 import { getForecast } from "../WeatherService/WeatherService";
-// import WeatherDetails from "../WeatherDetails/WeatherDetails";
+import ErrorPage from "../ErrorPage/ErrorPage";
 import WelcomeSection from "../WelcomeSection/WelcomeSection";
 import Loader from "../Loader/Loader";
 
@@ -77,10 +77,7 @@ function Main({ position }) {
       {isFetching && <Loader />}
       {!coordinates && <WelcomeSection />}
       <Routes>
-        <Route
-          path="/home"
-          element={<Home weatherDetails={weatherDetails} />}
-        />
+        <Route path="/" element={<Home weatherDetails={weatherDetails} />} />
         <Route
           path="/hourly"
           element={<Hourly weatherDetails={weatherDetails} />}
@@ -89,8 +86,8 @@ function Main({ position }) {
           path="/daily"
           element={<Daily weatherDetails={weatherDetails} />}
         />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
-      {/* {weatherFetched && <WeatherDetails weatherDetails={weatherDetails} />} */}
     </main>
   );
 }

@@ -81,14 +81,15 @@ export function createWeatherIcon(iconCode) {
 }
 
 //helper date time function
-export function dateTime(unixTime) {
-  let date = new Date(unixTime * 1000);
-  // let time = date.toLocaleTimeString();
+export function dateTime(unixTime, offset) {
+  unixTime = (unixTime + offset) * 1000;
+  let date = new Date(unixTime);
   let time =
-    date.getHours().toString().padStart(2, "0") +
+    date.getUTCHours().toString().padStart(2, "0") +
     ":" +
-    date.getMinutes().toString().padEnd(2, "0");
-  date = date.toString().split("2")[0].trimEnd().replace(" ", ", ");
+    date.getUTCMinutes().toString().padStart(2, "0");
+  const year = date.getFullYear().toString();
+  date = date.toUTCString().split(year)[0].trimEnd();
   return {
     date,
     time,

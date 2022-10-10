@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./navBar.css";
 function NavBar() {
   const myStyle = ({ isActive }) => ({
@@ -7,7 +7,7 @@ function NavBar() {
   return (
     <ul className="nav-list">
       <li>
-        <NavLink to="/home" style={myStyle}>
+        <NavLink to="/" style={myStyle}>
           Home
         </NavLink>
       </li>

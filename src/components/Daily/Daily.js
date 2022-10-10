@@ -14,10 +14,10 @@ function Daily({ weatherDetails }) {
     return (
       <div className="daily-weather">
         <h3>Weather this week</h3>
-        {/* <p>{date}</p> */}
+        <p>{date}</p>
         <ul className="unstyled-list">
           {daily.map((item) => (
-            <li key={item.dayTemp}>
+            <li key={item.dt}>
               <p>{item.dt}</p>
               <p>Temperature: {item.dayTemp + "/" + item.nightTemp}</p>
               <p>{item.desc}</p>
