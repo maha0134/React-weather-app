@@ -4,7 +4,7 @@ import MapService from "../MapService/MapService";
 import { getForecast } from "../WeatherService/WeatherService";
 import WelcomeSection from "../WelcomeSection/WelcomeSection";
 import Loader from "../Loader/Loader";
-
+// import Aside from "../Aside/Aside";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "../Home/Home";
 import Hourly from "../Hourly/Hourly";
@@ -15,16 +15,25 @@ function Main({ position }) {
   const [coordinates, setCoordinates] = useState(null);
   const [weatherDetails, setWeatherDetails] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
-  const [weatherFetched, setWeatherFetched] = useState(false);
   const [fetchFail, setFetchFail] = useState(false);
+  const [locationArray, setLocationArray] = useState([]);
 
   useEffect(() => {
-    if (location) {
+    if (location && !locationArray.includes(location)) {
       setIsFetching(true);
       setFetchFail(false);
       MapService(location).then((res) => {
         if (res) {
           setCoordinates(res);
+          if (!locationArray.includes(location)) {
+            locationArray.push(location);
+            if (locationArray.length > 3) {
+              localStorage.removeItem(locationArray[0]);
+              setLocationArray(locationArray.slice(1));
+            } else {
+              setLocationArray(locationArray);
+            }
+          }
         } else {
           setFetchFail(true);
           setIsFetching(false);
@@ -55,9 +64,9 @@ function Main({ position }) {
       };
       getForecast(standardCoordinates, location).then((res) => {
         if (res) {
+          setFetchFail(false);
           setWeatherDetails(res);
           setLocation("");
-          setWeatherFetched(true);
           setIsFetching(false);
         } else {
           setFetchFail(true);
@@ -74,6 +83,14 @@ function Main({ position }) {
     }
   }
 
+  function handleClick(ev) {
+    setIsFetching(true);
+    ev.preventDefault();
+    console.log(ev.target.innerText);
+    const button = ev.target.innerText;
+    setLocation(button);
+    setCoordinates(JSON.parse(localStorage.getItem(button)));
+  }
   return (
     <main>
       <form onSubmit={formSubmitted}>
@@ -108,6 +125,18 @@ function Main({ position }) {
         {/* Redirect every other route to Home */}
         <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
+      {locationArray.length > 0 && (
+        <aside>
+          <p>Recent Searches:</p>
+          <ul className="unstyled-list">
+            {locationArray.map((item) => (
+              <li key={`item${item}`} onClick={handleClick} className="btn">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </aside>
+      )}
     </main>
   );
 }
