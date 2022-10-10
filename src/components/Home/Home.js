@@ -12,8 +12,8 @@
 // }
 import { createWeatherIcon, dateTime } from "../WeatherService/WeatherService";
 import "./home.css";
-function Home({ weatherDetails }) {
-  if (weatherDetails && "lat" in weatherDetails) {
+function Home({ weatherDetails, fetchStatus }) {
+  if (weatherDetails && "lat" in weatherDetails && !fetchStatus) {
     const { temp, feels_like, sunrise, sunset, dt } = weatherDetails.current;
     const id = weatherDetails.current.weather[0].icon;
     const timezone = weatherDetails.timezone_offset;
@@ -43,8 +43,13 @@ function Home({ weatherDetails }) {
         </div>
       </div>
     );
-  } else {
-    return <></>;
+  } else if (fetchStatus) {
+    return (
+      <>
+        <h3>Seems like we could not find the location you were looking for.</h3>
+        <p>Please try again.</p>
+      </>
+    );
   }
 }
 export default Home;

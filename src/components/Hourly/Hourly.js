@@ -1,7 +1,7 @@
 import "./hourly.css";
 import { dateTime, createWeatherIcon } from "../WeatherService/WeatherService";
-function Hourly({ weatherDetails }) {
-  if (weatherDetails && "lat" in weatherDetails) {
+function Hourly({ weatherDetails, fetchStatus }) {
+  if (weatherDetails && "lat" in weatherDetails && !fetchStatus) {
     const hourlyWeather = weatherDetails.hourly;
     const timezone = weatherDetails.timezone_offset;
     let date = dateTime(weatherDetails.current.dt, timezone).date;
@@ -39,6 +39,13 @@ function Hourly({ weatherDetails }) {
           ))}
         </ul>
       </div>
+    );
+  } else if (fetchStatus) {
+    return (
+      <>
+        <h3>Seems like we could not find the location you were looking for.</h3>
+        <p>Please try again.</p>
+      </>
     );
   }
 }

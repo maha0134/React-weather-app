@@ -2,11 +2,10 @@ import { useState, useEffect } from "react";
 import "./main.css";
 import getGeolocation from "../MapService/MapService";
 import { getForecast } from "../WeatherService/WeatherService";
-import ErrorPage from "../ErrorPage/ErrorPage";
 import WelcomeSection from "../WelcomeSection/WelcomeSection";
 import Loader from "../Loader/Loader";
 
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "../Home/Home";
 import Hourly from "../Hourly/Hourly";
 import Daily from "../Daily/Daily";
@@ -17,12 +16,19 @@ function Main({ position }) {
   const [weatherDetails, setWeatherDetails] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
   const [weatherFetched, setWeatherFetched] = useState(false);
+  const [fetchFail, setFetchFail] = useState(false);
 
   useEffect(() => {
     if (location) {
       setIsFetching(true);
+      setFetchFail(false);
       getGeolocation(location).then((res) => {
-        setCoordinates(res);
+        if (res) {
+          setCoordinates(res);
+        } else {
+          setFetchFail(true);
+          setIsFetching(false);
+        }
       });
     }
   }, [location]);
@@ -48,10 +54,14 @@ function Main({ position }) {
         units: "metric",
       };
       getForecast(standardCoordinates, location).then((res) => {
-        setWeatherDetails(res);
-        setLocation("");
-        setWeatherFetched(true);
-        setIsFetching(false);
+        if (res) {
+          setWeatherDetails(res);
+          setLocation("");
+          setWeatherFetched(true);
+          setIsFetching(false);
+        } else {
+          setFetchFail(true);
+        }
       });
     }
   }, [coordinates]);
@@ -75,18 +85,28 @@ function Main({ position }) {
         <button type="submit">Search</button>
       </form>
       {isFetching && <Loader />}
-      {!coordinates && <WelcomeSection />}
+      {!coordinates && !fetchFail && <WelcomeSection />}
       <Routes>
-        <Route path="/" element={<Home weatherDetails={weatherDetails} />} />
+        <Route
+          path="/home"
+          element={
+            <Home weatherDetails={weatherDetails} fetchStatus={fetchFail} />
+          }
+        />
         <Route
           path="/hourly"
-          element={<Hourly weatherDetails={weatherDetails} />}
+          element={
+            <Hourly weatherDetails={weatherDetails} fetchStatus={fetchFail} />
+          }
         />
         <Route
           path="/daily"
-          element={<Daily weatherDetails={weatherDetails} />}
+          element={
+            <Daily weatherDetails={weatherDetails} fetchStatus={fetchFail} />
+          }
         />
-        <Route path="*" element={<ErrorPage />} />
+        {/* Redirect every other route to Home */}
+        <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
     </main>
   );

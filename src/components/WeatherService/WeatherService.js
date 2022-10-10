@@ -30,17 +30,20 @@ export async function getForecast(options, location) {
   if (!location) location = "current";
   const cacheItem = cache.get(location);
   if (cacheItem && !isExpired(cacheItem.current.dt)) {
-    //TODO remove console
-    console.log(cache, "returned from cache");
+    console.log("returned from cache");
     return cacheItem;
   }
   const forecast = await fetchForecast({
     units,
     coord,
   });
-  cache.set(location, forecast);
-  console.log(cache);
-  return forecast;
+  if (forecast) {
+    cache.set(location, forecast);
+    console.log(cache);
+    return forecast;
+  } else {
+    return null;
+  }
 
   /**
    * Helper function to check cache expiry
@@ -60,8 +63,14 @@ export async function getForecast(options, location) {
  */
 async function fetchForecast({ coord: { lat, lon }, units }) {
   const url = `${BASE_URL}?lat=${lat}&lon=${lon}&units=${units}&appid=${API_KEY}`;
-  const response = await fetch(url);
-  if (!response.ok) throw new Error(response.statusText);
+  let response;
+  try {
+    response = await fetch(url);
+    if (!response.ok) throw new Error(response.statusText);
+  } catch (err) {
+    console.log(err.statusText);
+    return null;
+  }
   return response.json();
 }
 

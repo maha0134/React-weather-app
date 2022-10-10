@@ -1,4 +1,4 @@
-function Daily({ weatherDetails }) {
+function Daily({ weatherDetails, fetchStatus }) {
   if (weatherDetails && "lat" in weatherDetails) {
     const dailyWeather = weatherDetails.daily;
     let date = new Date(weatherDetails.current.dt * 1000).toLocaleDateString();
@@ -25,6 +25,13 @@ function Daily({ weatherDetails }) {
           ))}
         </ul>
       </div>
+    );
+  } else if (fetchStatus) {
+    return (
+      <>
+        <h3>Seems like we could not find the location you were looking for.</h3>
+        <p>Please try again.</p>
+      </>
     );
   }
 }

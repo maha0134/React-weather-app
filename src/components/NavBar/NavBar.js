@@ -7,7 +7,7 @@ function NavBar() {
   return (
     <ul className="nav-list">
       <li>
-        <NavLink to="/" style={myStyle}>
+        <NavLink to="/home" style={myStyle}>
           Home
         </NavLink>
       </li>
