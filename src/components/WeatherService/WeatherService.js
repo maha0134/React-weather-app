@@ -76,6 +76,21 @@ export function createWeatherIcon(iconCode) {
     "src",
     "https://openweathermap.org/img/w/" + iconCode + ".png"
   );
-  img.setAttribute("alt", "");
+  img.setAttribute("alt", "weather-icon");
   return img;
+}
+
+//helper date time function
+export function dateTime(unixTime) {
+  let date = new Date(unixTime * 1000);
+  // let time = date.toLocaleTimeString();
+  let time =
+    date.getHours().toString().padStart(2, "0") +
+    ":" +
+    date.getMinutes().toString().padEnd(2, "0");
+  date = date.toString().split("2")[0].trimEnd().replace(" ", ", ");
+  return {
+    date,
+    time,
+  };
 }

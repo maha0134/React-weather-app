@@ -1,28 +1,41 @@
+import "./hourly.css";
+import { dateTime, createWeatherIcon } from "../WeatherService/WeatherService";
 function Hourly({ weatherDetails }) {
   if (weatherDetails && "lat" in weatherDetails) {
     const hourlyWeather = weatherDetails.hourly;
-    let date = new Date(weatherDetails.current.dt * 1000).toLocaleDateString();
-    const hourly = hourlyWeather.slice(0, 6).map((item) => {
+    let date = dateTime(weatherDetails.current.dt).date;
+    const hourly = hourlyWeather.slice(1, 7).map((item) => {
+      let desc = item.weather[0].description;
+      desc = desc.charAt(0).toUpperCase() + desc.slice(1);
       const tempObject = {
-        time: new Date(item.dt * 1000).toLocaleTimeString(),
-        temp: item.temp,
+        time: dateTime(item.dt).time,
+        temp: item.temp.toFixed(1),
         feels_like: item.feels_like,
-        desc: item.weather.description,
+        desc,
+        id: item.weather[0].icon,
       };
       return tempObject;
     });
     return (
-      <div className="current-weather">
-        <h3>Hourly weather</h3>
-        <p>{date}</p>
-        {hourly.map((item) => (
-          <div key={item.temp}>
-            <p>{item.time}</p>
-            <p>Temperature: {item.temp}</p>
-            <p>Feels like: {item.feels_like}</p>
-            <p>{item.desc}</p>
-          </div>
-        ))}
+      <div className="hourly-weather">
+        <div className="heading">
+          <h3>Hourly weather</h3>
+          <h4>{date}</h4>
+        </div>
+        <ul className="unstyled-list">
+          {hourly.map((item) => (
+            <li key={item.temp}>
+              <h4>{item.time}</h4>
+              <img
+                src={createWeatherIcon(item.id).src}
+                alt={createWeatherIcon(item.id).alt}
+              />
+              <h4>{item.temp}&deg;C</h4>
+              <p>{item.desc}</p>
+              <p>Feels like: {item.feels_like}&deg;C</p>
+            </li>
+          ))}
+        </ul>
       </div>
     );
   }

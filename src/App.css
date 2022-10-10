@@ -9,3 +9,9 @@
   top: 0;
   left: 0;
 }
+img {
+  max-width: 100%;
+}
+*:focus {
+  outline: solid rgb(25, 255, 190) 1px;
+}

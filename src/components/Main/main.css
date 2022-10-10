@@ -52,15 +52,3 @@ form button:focus {
 form h2 {
   margin: 0;
 }
-
-.current-weather {
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-  padding: 2rem;
-}
-
-.current-weather h3,
-.current-weather p {
-  margin: 0;
-}
