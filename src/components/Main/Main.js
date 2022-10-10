@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./main.css";
-import getGeolocation from "../MapService/MapService";
+import MapService from "../MapService/MapService";
 import { getForecast } from "../WeatherService/WeatherService";
 import WelcomeSection from "../WelcomeSection/WelcomeSection";
 import Loader from "../Loader/Loader";
@@ -22,7 +22,7 @@ function Main({ position }) {
     if (location) {
       setIsFetching(true);
       setFetchFail(false);
-      getGeolocation(location).then((res) => {
+      MapService(location).then((res) => {
         if (res) {
           setCoordinates(res);
         } else {
