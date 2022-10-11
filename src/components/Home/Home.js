@@ -1,17 +1,7 @@
-// import Main from "../Main/Main";
-// function Home({ position }) {
-//   if (position === null) {
-//     return <Main position={position} />;
-//   } else {
-//     const coords = {
-//       lat: position.coords.latitude,
-//       lon: position.coords.longitude,
-//     };
-//     return <Main position={coords} />;
-//   }
-// }
 import { createWeatherIcon, dateTime } from "../WeatherService/WeatherService";
 import "./home.css";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
+
 function Home({ weatherDetails, fetchStatus }) {
   if (weatherDetails && "lat" in weatherDetails && !fetchStatus) {
     const { temp, feels_like, sunrise, sunset, dt } = weatherDetails.current;
@@ -44,12 +34,7 @@ function Home({ weatherDetails, fetchStatus }) {
       </div>
     );
   } else if (fetchStatus) {
-    return (
-      <>
-        <h3>Seems like we could not find the location you were looking for.</h3>
-        <p>Please try again.</p>
-      </>
-    );
+    return <ErrorMessage />;
   }
 }
 export default Home;

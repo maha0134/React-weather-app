@@ -1,25 +1,41 @@
+import { dateTime, createWeatherIcon } from "../WeatherService/WeatherService";
+import "./daily.css";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
+
 function Daily({ weatherDetails, fetchStatus }) {
   if (weatherDetails && "lat" in weatherDetails) {
     const dailyWeather = weatherDetails.daily;
-    let date = new Date(weatherDetails.current.dt * 1000).toLocaleDateString();
+    const timezone = weatherDetails.timezone_offset;
+    let date = dateTime(weatherDetails.current.dt, timezone).date;
     const daily = dailyWeather.slice(1, 7).map((item) => {
+      let desc = item.weather[0].description;
+      desc = desc.charAt(0).toUpperCase() + desc.slice(1);
       const tempObject = {
-        dt: new Date(item.dt * 1000).toLocaleDateString(),
-        dayTemp: item.feels_like.day,
-        nightTemp: item.feels_like.night,
-        desc: item.weather[0].description,
+        dt: dateTime(item.dt, timezone),
+        dayTemp: item.feels_like.day.toFixed(0),
+        nightTemp: item.feels_like.night.toFixed(0),
+        desc,
+        id: item.weather[0].icon,
       };
       return tempObject;
     });
     return (
       <div className="daily-weather">
-        <h3>Weather this week</h3>
-        <p>{date}</p>
+        <div className="heading">
+          <h3>Weather this week</h3>
+          <h4>{date}</h4>
+        </div>
         <ul className="unstyled-list">
           {daily.map((item) => (
-            <li key={item.dt}>
-              <p>{item.dt}</p>
-              <p>Temperature: {item.dayTemp + "/" + item.nightTemp}</p>
+            <li key={item.dt.date}>
+              <h4>{item.dt.date.split(",")[1]}</h4>
+              <img
+                src={createWeatherIcon(item.id).src}
+                alt={createWeatherIcon(item.id).alt}
+              />
+              <h4>
+                {item.dayTemp}&deg;C | {item.nightTemp}&deg;C
+              </h4>
               <p>{item.desc}</p>
             </li>
           ))}
@@ -27,12 +43,7 @@ function Daily({ weatherDetails, fetchStatus }) {
       </div>
     );
   } else if (fetchStatus) {
-    return (
-      <>
-        <h3>Seems like we could not find the location you were looking for.</h3>
-        <p>Please try again.</p>
-      </>
-    );
+    return <ErrorMessage />;
   }
 }
 

@@ -1,28 +1,29 @@
-.current-weather {
+.current-weather,
+.hourly-weather,
+.daily-weather {
   display: flex;
   flex-direction: column;
   gap: 2rem;
   align-items: center;
-  font-size: 2rem;
-  margin-top: 3rem;
+  font-size: 1rem;
   /* background-color: rgb(175, 252, 227); */
   background: linear-gradient(135deg, rgb(224, 255, 246), rgb(29, 221, 202));
   position: relative;
   border-radius: 0.25rem;
-  /* font-weight: bold; */
   overflow: hidden;
   box-shadow: 0 0 10px;
-  width: min(80vw, 60rem);
   transform: scale(1);
 }
-
+.current-weather {
+  font-size: 2rem;
+}
 .current-weather .card-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 1.25rem;
   width: 100%;
-  padding: 2rem 2rem 4rem;
+  padding: 0 2rem 4rem;
 }
 .current-weather h3,
 p,

@@ -2,7 +2,9 @@ import "./header.css";
 function Header() {
   return (
     <header className="App-header">
-      <h1>Weather App</h1>
+      <h1>
+        <a href="/">Weather App</a>
+      </h1>
     </header>
   );
 }

@@ -1,11 +1,17 @@
 main {
-  display: flex;
+  display: grid;
+  grid-template-areas:
+    "a a"
+    "b b"
+    "c c";
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   font-size: 1.25rem;
+  gap: 2.5rem;
+  padding: 1rem;
 }
 form {
-  padding: 1.5rem;
+  padding: 1rem;
   text-align: center;
   display: flex;
   align-items: center;
@@ -14,6 +20,7 @@ form {
   /* background-color: black; */
   justify-content: flex-end;
   align-self: flex-end;
+  grid-area: a;
 }
 
 form input,
@@ -28,7 +35,7 @@ form input {
   width: 15rem;
 }
 
-form button {
+.btn {
   padding: 0.35em 0.75em;
   border-radius: 5rem;
   box-shadow: inset 0 0 3px;
@@ -39,8 +46,8 @@ form button {
   transition: 0.25s linear;
 }
 
-form button:hover,
-form button:focus {
+.btn:hover,
+.btn:focus {
   background-color: rgb(2, 218, 149);
 }
 
@@ -51,4 +58,45 @@ form button:focus {
 
 form h2 {
   margin: 0;
+}
+
+aside {
+  display: flex;
+  flex-direction: row;
+  grid-area: c;
+  align-self: center;
+  margin: 0 auto;
+  align-items: center;
+}
+aside .unstyled-list {
+  flex-direction: row;
+}
+
+aside .btn {
+  padding: 1rem 3rem;
+  display: flex;
+  background-color: rgba(1, 255, 175);
+  text-align: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.25s linear;
+  border-radius: 5rem;
+}
+
+aside h3 {
+  /* border-radius: 0; */
+  font-size: 1.5rem;
+  align-self: center;
+  margin: 0;
+  color: white;
+  background-color: hsla(0, 0%, 0%, 0.8);
+}
+
+main .daily-weather,
+.current-weather,
+.hourly-weather {
+  grid-area: b;
+  width: min(60rem, 100%);
+  margin: 0 auto;
+  /* padding-top: 1rem; */
 }

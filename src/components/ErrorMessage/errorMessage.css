@@ -1,0 +1,18 @@
+.error {
+  grid-area: b;
+  align-self: center;
+  margin: 0 auto;
+  text-align: center;
+  max-width: min(50rem, 100%);
+  margin-top: 2rem;
+  padding: 4rem;
+  color: rgb(2, 5, 14);
+  background-color: rgb(234, 3, 80);
+  box-shadow: 0 0 5px;
+}
+.error h3 {
+  border-radius: 0;
+  background-color: transparent;
+  text-align: center;
+  box-shadow: none;
+}

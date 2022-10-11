@@ -2,7 +2,7 @@ import "./welcomeSection.css";
 function WelcomeSection() {
   return (
     <div className="welcome">
-      <p>Welcome to the Weather App.</p>
+      <h2>Welcome to the Weather App.</h2>
       <p>Enter a location in the search box above to see results.</p>
     </div>
   );

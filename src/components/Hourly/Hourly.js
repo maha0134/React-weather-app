@@ -1,5 +1,6 @@
 import "./hourly.css";
 import { dateTime, createWeatherIcon } from "../WeatherService/WeatherService";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 function Hourly({ weatherDetails, fetchStatus }) {
   if (weatherDetails && "lat" in weatherDetails && !fetchStatus) {
     const hourlyWeather = weatherDetails.hourly;
@@ -41,12 +42,7 @@ function Hourly({ weatherDetails, fetchStatus }) {
       </div>
     );
   } else if (fetchStatus) {
-    return (
-      <>
-        <h3>Seems like we could not find the location you were looking for.</h3>
-        <p>Please try again.</p>
-      </>
-    );
+    return <ErrorMessage />;
   }
 }
 export default Hourly;

@@ -99,7 +99,9 @@ function Main({ position }) {
         <label htmlFor="location" className="screen-reader-text">
           Enter location here
         </label>
-        <button type="submit">Search</button>
+        <button className="btn" type="submit">
+          Search
+        </button>
       </form>
       {isFetching && <Loader />}
       {!coordinates && !fetchFail && <WelcomeSection />}
@@ -127,7 +129,7 @@ function Main({ position }) {
       </Routes>
       {locationArray.length > 0 && (
         <aside>
-          <p>Recent Searches:</p>
+          <h3>Recent Searches:</h3>
           <ul className="unstyled-list">
             {locationArray.map((item) => (
               <li key={`item${item}`} onClick={handleClick} className="btn">
