@@ -1,4 +1,4 @@
-import dateTime from "../../helperFunctions/dateTime";
+import dateTime from "../../services/dateTime";
 import Image from "../Image/Image";
 import "./home.css";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";

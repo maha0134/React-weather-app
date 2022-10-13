@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import "./main.css";
-import mapService from "../../helperFunctions/mapService";
-import getForecast from "../../helperFunctions/getForecast";
+import mapService from "../../services/mapService";
+import getForecast from "../../services/getForecast";
 import WelcomeSection from "../WelcomeSection/WelcomeSection";
 import Loader from "../Loader/Loader";
-// import Aside from "../Aside/Aside";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "../Home/Home";
 import Hourly from "../Hourly/Hourly";

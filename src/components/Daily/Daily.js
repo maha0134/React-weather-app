@@ -1,4 +1,4 @@
-import dateTime from "../../helperFunctions/dateTime";
+import dateTime from "../../services/dateTime";
 import Image from "../Image/Image";
 import "./daily.css";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
@@ -29,12 +29,14 @@ function Daily({ weatherDetails, fetchStatus }) {
         <ul className="unstyled-list">
           {daily.map((item) => (
             <li key={item.dt.date}>
-              <h4>{item.dt.date.split(",")[1]}</h4>
-              <Image id={item.id} alt={item.desc} />
-              <h4>
-                {item.dayTemp}&deg;C | {item.nightTemp}&deg;C
-              </h4>
-              <p>{item.desc}</p>
+              <div className="main-daily">
+                <h4>{item.dt.date.split(",")[1]}</h4>
+                <Image id={item.id} alt={item.desc} />
+                <h4>
+                  {item.dayTemp}&deg;C | {item.nightTemp}&deg;C
+                </h4>
+              </div>
+              <p className="rest-daily">{item.desc}</p>
             </li>
           ))}
         </ul>

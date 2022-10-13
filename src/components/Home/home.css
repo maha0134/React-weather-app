@@ -1,6 +1,7 @@
 .current-weather {
   text-align: center;
-  font-size: 1.25rem;
+  font-size: 1.35rem;
+  background: linear-gradient(to left, rgb(6, 255, 184), rgb(29, 221, 202));
 }
 .current-weather h4 {
   margin: 0;
@@ -12,10 +13,14 @@
 .current-weather .card-content {
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: 2rem 1rem;
   margin: 0 auto;
   width: min(100%, 20rem);
 }
+.current-weather .single-file.middle {
+  padding: 0 1rem;
+}
+
 .current-weather .single-file.middle,
 .current-weather .card-content .single-file:nth-child(2) {
   display: flex;
@@ -28,8 +33,14 @@ img {
   transform: scale(1);
 }
 .current-weather .card-content .single-file:nth-child(2) p {
-  margin: 0;
+  margin-top: 0;
 }
+
+.current-weather h3 {
+  display: block;
+  border-radius: 0;
+}
+
 @keyframes scale {
   0% {
     transform: scale(1);
@@ -58,6 +69,7 @@ img {
   p,
   h4 {
     margin: 0;
+    border-bottom-right-radius: 3rem;
   }
 
   .current-weather .card-content .single-file,

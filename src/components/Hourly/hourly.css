@@ -1,18 +1,51 @@
-.unstyled-list {
+.hourly-weather .unstyled-list {
   list-style-type: none;
   padding: 0;
   margin: 0;
   display: flex;
-  gap: 2rem;
   flex-wrap: wrap;
-  padding: 2rem;
   justify-content: center;
-  border: 2px solid brown;
+}
+.hourly-weather h3 {
+  display: block;
+  border-radius: 0;
+  margin-bottom: 0;
+}
+.hourly-weather .unstyled-list li {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0;
+  background: linear-gradient(to left, rgb(6, 255, 184), rgb(29, 221, 202));
+  border-radius: 0.125rem;
+  align-items: center;
+  box-shadow: 0 0 3px;
+}
+.hourly-weather .heading h4 {
+  margin: 1rem 0;
 }
 
-.unstyled-list li {
-  display: flex;
+.hourly-weather .unstyled-list h4,
+h5 {
+  margin: 0;
 }
+.main-hourly {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.rest-hourly {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  gap: 5rem;
+}
+.rest-hourly p {
+  margin-top: 0;
+}
+
 @media only screen and (min-width: 45em) {
   .hourly-weather .heading {
     display: flex;
@@ -23,44 +56,27 @@
     align-items: center;
   }
 
-  .unstyled-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
-    padding: 2rem;
-    justify-content: center;
-    border: none;
-  }
   .hourly-weather .unstyled-list {
-    /* width: min(80vw, 70rem); */
     flex-wrap: nowrap;
-    gap: 0.75rem;
+    padding: 2rem;
   }
 
   .hourly-weather .unstyled-list li {
     padding: 1rem 1.5rem;
     display: flex;
     flex-direction: column;
-    /* background-color: rgb(0, 255, 221); */
-    /* background: linear-gradient(to top, rgb(3, 255, 184), rgb(0, 204, 255)); */
-    /* box-shadow: inset 0 0 3px; */
     align-items: center;
     border-radius: 0.75rem;
     gap: 0.75rem;
     font-size: 1.15rem;
+    background: transparent;
+    /* justify-content: space-between; */
+    box-shadow: none;
     margin: 0;
-    /* font-size: 2rem; */
-    /* flex: 0 0.7 15rem; */
   }
 
-  .hourly-weather p:first-child {
-    font-weight: bold;
-  }
   .hourly-weather h3 {
-    /* border-radius: 0; */
+    border-bottom-right-radius: 3rem;
     margin: 0;
   }
 
@@ -76,5 +92,16 @@
 
   .hourly-weather li h4 {
     font-size: 1.5rem;
+  }
+  .main-hourly,
+  .rest-hourly {
+    flex-direction: column;
+  }
+  .main-hourly {
+    gap: 0;
+  }
+  .rest-hourly {
+    gap: 0.75rem;
+    flex: 1;
   }
 }

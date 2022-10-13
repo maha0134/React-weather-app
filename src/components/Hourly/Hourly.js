@@ -1,5 +1,5 @@
 import "./hourly.css";
-import dateTime from "../../helperFunctions/dateTime";
+import dateTime from "../../services/dateTime";
 import Image from "../Image/Image";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 function Hourly({ weatherDetails, fetchStatus }) {
@@ -29,11 +29,15 @@ function Hourly({ weatherDetails, fetchStatus }) {
         <ul className="unstyled-list">
           {hourly.map((item) => (
             <li key={item.time}>
-              <h4>{item.time}</h4>
-              <Image id={item.id} alt={item.desc} />
-              <h5>{item.temp}&deg;C</h5>
-              <p>{item.desc}</p>
-              <p>Feels like: {item.feels_like}&deg;C</p>
+              <div className="main-hourly">
+                <h4>{item.time}</h4>
+                <Image id={item.id} alt={item.desc} />
+                <h5>{item.temp}&deg;C</h5>
+              </div>
+              <div className="rest-hourly">
+                <p>{item.desc}</p>
+                <p>Feels like: {item.feels_like}&deg;C</p>
+              </div>
             </li>
           ))}
         </ul>
