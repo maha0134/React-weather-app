@@ -8,22 +8,25 @@ function Home({ weatherDetails, fetchStatus }) {
     const { temp, feels_like, sunrise, sunset, dt } = weatherDetails.current;
     const id = weatherDetails.current.weather[0].icon;
     const timezone = weatherDetails.timezone_offset;
+
     let desc = weatherDetails.current.weather[0].description;
+    //capitalize first alphabet of description
     desc = desc.charAt(0).toUpperCase() + desc.slice(1);
+
     return (
       <div className="current-weather" tabIndex="0">
         <div className="single-file top">
           <h3>CurrentWeather</h3>
-          <p>{dateTime(dt, timezone).date}</p>
+          <h4>{dateTime(dt, timezone).date}</h4>
         </div>
+
         <div className="card-content">
           <div className="single-file middle">
             <Image id={id} alt={desc} />
-            <h4>{temp.toFixed(0)}&deg;C</h4>
+            <h4 className="big-text">{temp.toFixed(0)}&deg;C</h4>
           </div>
           <div className="single-file">
             <p>{desc}</p>
-            {/* <span>&#x2223;</span> */}
             <p>Feels like: {feels_like.toFixed(0)}&deg;C</p>
           </div>
           <div className="single-file">

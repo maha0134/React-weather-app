@@ -1,15 +1,3 @@
-.hourly-weather .heading,
-.daily-weather .heading {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-  /* background-color: rgb(0, 255, 191); */
-  padding: 0 2rem;
-  font-size: 1.5rem;
-  align-items: center;
-}
-
 .unstyled-list {
   list-style-type: none;
   padding: 0;
@@ -19,48 +7,74 @@
   flex-wrap: wrap;
   padding: 2rem;
   justify-content: center;
-}
-.hourly-weather .unstyled-list {
-  /* width: min(80vw, 70rem); */
-  flex-wrap: nowrap;
-  /* overflow-x: scroll; */
-  gap: 0.75rem;
+  border: 2px solid brown;
 }
 
-.hourly-weather .unstyled-list li {
-  padding: 1rem 1.5rem;
+.unstyled-list li {
   display: flex;
-  flex-direction: column;
-  /* background-color: rgb(0, 255, 221); */
-  /* background: linear-gradient(to top, rgb(3, 255, 184), rgb(0, 204, 255)); */
-  /* box-shadow: inset 0 0 3px; */
-  align-items: center;
-  border-radius: 0.75rem;
-  gap: 0.75rem;
-  font-size: 1.15rem;
-  margin: 0;
-  /* font-size: 2rem; */
-  /* flex: 0 0.7 15rem; */
 }
+@media only screen and (min-width: 45em) {
+  .hourly-weather .heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 1.5rem;
+    align-items: center;
+  }
 
-.hourly-weather p:first-child {
-  font-weight: bold;
-}
-.hourly-weather h3 {
-  /* border-radius: 0; */
-  margin: 0;
-}
+  .unstyled-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    padding: 2rem;
+    justify-content: center;
+    border: none;
+  }
+  .hourly-weather .unstyled-list {
+    /* width: min(80vw, 70rem); */
+    flex-wrap: nowrap;
+    gap: 0.75rem;
+  }
 
-.hourly-weather h5 {
-  margin: 0;
-  font-size: 1.5rem;
-}
+  .hourly-weather .unstyled-list li {
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    /* background-color: rgb(0, 255, 221); */
+    /* background: linear-gradient(to top, rgb(3, 255, 184), rgb(0, 204, 255)); */
+    /* box-shadow: inset 0 0 3px; */
+    align-items: center;
+    border-radius: 0.75rem;
+    gap: 0.75rem;
+    font-size: 1.15rem;
+    margin: 0;
+    /* font-size: 2rem; */
+    /* flex: 0 0.7 15rem; */
+  }
 
-.hourly-weather .heading h4 {
-  padding-right: 2rem;
-  font-size: 2rem;
-}
+  .hourly-weather p:first-child {
+    font-weight: bold;
+  }
+  .hourly-weather h3 {
+    /* border-radius: 0; */
+    margin: 0;
+  }
 
-.hourly-weather li h4 {
-  font-size: 1.5rem;
+  .hourly-weather h5 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+
+  .hourly-weather .heading h4 {
+    padding-right: 2rem;
+    font-size: 2rem;
+  }
+
+  .hourly-weather li h4 {
+    font-size: 1.5rem;
+  }
 }
