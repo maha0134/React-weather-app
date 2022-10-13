@@ -25,7 +25,7 @@ const cache = new Map();
  * @returns {Object} Forecast results
  * @see https://openweathermap.org/api/one-call-api#data
  */
-export async function getForecast(options, location) {
+export default async function getForecast(options, location) {
   const { coord, units } = options;
   if (!location) location = "current";
   const cacheItem = cache.get(location);
@@ -72,35 +72,4 @@ async function fetchForecast({ coord: { lat, lon }, units }) {
     return null;
   }
   return response.json();
-}
-
-/**
- * Returns an <img> HTMLElement with the correct URL to display
- * the OpenWeather image corresponding to the given `iconCode`.
- * @param {string} iconCode
- */
-export function createWeatherIcon(iconCode) {
-  let img = document.createElement("img");
-  img.setAttribute(
-    "src",
-    "https://openweathermap.org/img/w/" + iconCode + ".png"
-  );
-  img.setAttribute("alt", "weather-icon");
-  return img;
-}
-
-//helper date time function
-export function dateTime(unixTime, offset) {
-  unixTime = (unixTime + offset) * 1000;
-  let date = new Date(unixTime);
-  let time =
-    date.getUTCHours().toString().padStart(2, "0") +
-    ":" +
-    date.getUTCMinutes().toString().padStart(2, "0");
-  const year = date.getFullYear().toString();
-  date = date.toUTCString().split(year)[0].trimEnd();
-  return {
-    date,
-    time,
-  };
 }

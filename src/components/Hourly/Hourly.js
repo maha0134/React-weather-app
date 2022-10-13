@@ -1,5 +1,6 @@
 import "./hourly.css";
-import { dateTime, createWeatherIcon } from "../WeatherService/WeatherService";
+import dateTime from "../../helperFunctions/dateTime";
+import Image from "../Image/Image";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 function Hourly({ weatherDetails, fetchStatus }) {
   if (weatherDetails && "lat" in weatherDetails && !fetchStatus) {
@@ -29,10 +30,7 @@ function Hourly({ weatherDetails, fetchStatus }) {
           {hourly.map((item) => (
             <li key={item.time}>
               <h4>{item.time}</h4>
-              <img
-                src={createWeatherIcon(item.id).src}
-                alt={createWeatherIcon(item.id).alt}
-              />
+              <Image id={item.id} alt={item.desc} />
               <h5>{item.temp}&deg;C</h5>
               <p>{item.desc}</p>
               <p>Feels like: {item.feels_like}&deg;C</p>

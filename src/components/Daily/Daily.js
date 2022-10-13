@@ -1,4 +1,5 @@
-import { dateTime, createWeatherIcon } from "../WeatherService/WeatherService";
+import dateTime from "../../helperFunctions/dateTime";
+import Image from "../Image/Image";
 import "./daily.css";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
@@ -29,10 +30,7 @@ function Daily({ weatherDetails, fetchStatus }) {
           {daily.map((item) => (
             <li key={item.dt.date}>
               <h4>{item.dt.date.split(",")[1]}</h4>
-              <img
-                src={createWeatherIcon(item.id).src}
-                alt={createWeatherIcon(item.id).alt}
-              />
+              <Image id={item.id} alt={item.desc} />
               <h4>
                 {item.dayTemp}&deg;C | {item.nightTemp}&deg;C
               </h4>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./main.css";
-import MapService from "../MapService/MapService";
-import { getForecast } from "../WeatherService/WeatherService";
+import mapService from "../../helperFunctions/mapService";
+import getForecast from "../../helperFunctions/getForecast";
 import WelcomeSection from "../WelcomeSection/WelcomeSection";
 import Loader from "../Loader/Loader";
 // import Aside from "../Aside/Aside";
@@ -22,7 +22,7 @@ function Main({ position }) {
     if (location && !locationArray.includes(location)) {
       setIsFetching(true);
       setFetchFail(false);
-      MapService(location).then((res) => {
+      mapService(location).then((res) => {
         if (res) {
           setCoordinates(res);
           if (!locationArray.includes(location)) {

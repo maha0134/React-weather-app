@@ -13,6 +13,6 @@
 img {
   max-width: 100%;
 }
-*:focus {
+*:focus:focus-visible {
   outline: solid rgb(25, 255, 190) 1px;
 }
