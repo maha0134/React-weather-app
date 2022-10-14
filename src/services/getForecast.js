@@ -1,13 +1,6 @@
 // 'use strict';
 const BASE_URL = "https://api.openweathermap.org/data/2.5/onecall";
 const API_KEY = "15487eec3e5e8f7846e151279d9bbd6b";
-// const DEFAULT_OPTIONS = {
-//   coord: {
-//     lat: 45.35,
-//     lon: -75.76,
-//   }, // Algonquin College
-//   units: "metric",
-// };
 const cache = new Map();
 
 /**
@@ -27,7 +20,6 @@ const cache = new Map();
  */
 export default async function getForecast(options, location) {
   const { coord, units } = options;
-  if (!location) location = "current";
   const cacheItem = cache.get(location);
   if (cacheItem && !isExpired(cacheItem.current.dt)) {
     console.log("returned from cache");

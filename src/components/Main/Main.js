@@ -18,13 +18,12 @@ function Main({ position }) {
   const [locationArray, setLocationArray] = useState([]);
 
   useEffect(() => {
-    if (location && !locationArray.includes(location)) {
+    if (location && !locationArray.includes(location) && location!=="current location") {
       setIsFetching(true);
       setFetchFail(false);
       mapService(location).then((res) => {
         if (res) {
           setCoordinates(res);
-          // if (!locationArray.includes(location)) {
           locationArray.push(location);
           if (locationArray.length > 3) {
             localStorage.removeItem(locationArray[0]);
@@ -32,7 +31,6 @@ function Main({ position }) {
           } else {
             setLocationArray(locationArray);
           }
-          // }
         } else {
           setFetchFail(true);
           setIsFetching(false);
@@ -47,6 +45,7 @@ function Main({ position }) {
         lat: position.coords.latitude,
         lon: position.coords.longitude,
       };
+      setLocation("current location")
       setCoordinates(coords);
       setIsFetching(true);
     }
