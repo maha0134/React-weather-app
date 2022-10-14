@@ -2,7 +2,7 @@ import "./hourly.css";
 import dateTime from "../../services/dateTime";
 import Image from "../Image/Image";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
-function Hourly({ weatherDetails, fetchStatus }) {
+function Hourly({ weatherDetails, fetchStatus, location }) {
   if (weatherDetails && "lat" in weatherDetails && !fetchStatus) {
     const hourlyWeather = weatherDetails.hourly;
     const timezone = weatherDetails.timezone_offset;
@@ -21,30 +21,35 @@ function Hourly({ weatherDetails, fetchStatus }) {
       return tempObject;
     });
     return (
-      <div className="hourly-weather">
-        <div className="heading">
-          <h3>Hourly weather</h3>
-          <h4>{date}</h4>
+      <>
+        <h2 className="message">
+          Showing weather results for <span>{location}</span>
+        </h2>
+        <div className="hourly-weather">
+          <div className="heading">
+            <h3>Hourly weather</h3>
+            <h4>{date}</h4>
+          </div>
+          <ul className="unstyled-list">
+            {hourly.map((item) => (
+              <li key={item.time}>
+                <div className="main-hourly">
+                  <h4>{item.time}</h4>
+                  <Image id={item.id} alt={item.desc} />
+                  <h4>{item.temp}&deg;C</h4>
+                </div>
+                <div className="rest-hourly">
+                  <p>{item.desc}</p>
+                  <p>Feels like: {item.feels_like}&deg;C</p>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
-        <ul className="unstyled-list">
-          {hourly.map((item) => (
-            <li key={item.time}>
-              <div className="main-hourly">
-                <h4>{item.time}</h4>
-                <Image id={item.id} alt={item.desc} />
-                <h5>{item.temp}&deg;C</h5>
-              </div>
-              <div className="rest-hourly">
-                <p>{item.desc}</p>
-                <p>Feels like: {item.feels_like}&deg;C</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+      </>
     );
   } else if (fetchStatus) {
-    return <ErrorMessage />;
+    return <ErrorMessage location={location} />;
   }
 }
 export default Hourly;

@@ -54,6 +54,15 @@ aside {
   align-items: center;
 }
 
+h2.message {
+  padding: 0 1.5rem;
+  margin-top: 0;
+}
+h2.message span {
+  font-style: italic;
+  color: rgb(0, 110, 255);
+}
+
 aside .unstyled-list {
   display: flex;
   flex-direction: column;
@@ -84,11 +93,12 @@ main {
     grid-template-areas:
       "a a"
       "b b"
-      "c c";
+      "c c"
+      "d d";
     flex-direction: column;
     /* align-items: center; */
     font-size: 1.25rem;
-    gap: 2.5rem;
+    gap: 2rem;
     padding: 1rem;
   }
   h3 {
@@ -102,8 +112,17 @@ main {
     border-bottom-right-radius: 3rem;
     box-shadow: 0 0 5px;
   }
+  h2.message {
+    grid-area: b;
+    padding: 0 1.5rem;
+    margin: 0;
+  }
+  h2.message span {
+    font-style: italic;
+    color: rgb(0, 110, 255);
+  }
   form {
-    padding: 1rem;
+    padding: 1rem 1rem 0;
     text-align: center;
     flex-direction: row;
     justify-content: flex-end;
@@ -126,7 +145,7 @@ main {
   aside {
     flex-direction: row;
     gap: 2rem;
-    grid-area: c;
+    grid-area: d;
   }
   aside h3 {
     align-self: center;
@@ -140,7 +159,7 @@ main {
   main .daily-weather,
   .current-weather,
   .hourly-weather {
-    grid-area: b;
+    grid-area: c;
     width: min(60rem, 100%);
     margin: 0 auto;
     display: flex;

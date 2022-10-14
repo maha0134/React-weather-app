@@ -6,9 +6,13 @@
   max-width: min(50rem, 100%);
   margin-top: 2rem;
   padding: 4rem;
+  font-size: 2rem;
   color: rgb(2, 5, 14);
-  background-color: rgb(234, 3, 80);
+  background-color: rgb(156, 228, 214);
   box-shadow: 0 0 5px;
+}
+.error span {
+  font-weight: bold;
 }
 .error h3 {
   border-radius: 0;

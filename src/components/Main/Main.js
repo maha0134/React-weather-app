@@ -24,15 +24,15 @@ function Main({ position }) {
       mapService(location).then((res) => {
         if (res) {
           setCoordinates(res);
-          if (!locationArray.includes(location)) {
-            locationArray.push(location);
-            if (locationArray.length > 3) {
-              localStorage.removeItem(locationArray[0]);
-              setLocationArray(locationArray.slice(1));
-            } else {
-              setLocationArray(locationArray);
-            }
+          // if (!locationArray.includes(location)) {
+          locationArray.push(location);
+          if (locationArray.length > 3) {
+            localStorage.removeItem(locationArray[0]);
+            setLocationArray(locationArray.slice(1));
+          } else {
+            setLocationArray(locationArray);
           }
+          // }
         } else {
           setFetchFail(true);
           setIsFetching(false);
@@ -65,7 +65,7 @@ function Main({ position }) {
         if (res) {
           setFetchFail(false);
           setWeatherDetails(res);
-          setLocation("");
+          // setLocation("");
           setIsFetching(false);
         } else {
           setFetchFail(true);
@@ -76,16 +76,18 @@ function Main({ position }) {
 
   function formSubmitted(ev) {
     ev.preventDefault();
-    if (ev.target[0].value) {
-      setLocation(ev.target[0].value);
-      setIsFetching(true);
+    const query = ev.target[0].value;
+    if (query) {
+      setLocation(query);
+      if (locationArray.includes(query)) {
+        setCoordinates(JSON.parse(localStorage.getItem(query)));
+      }
     }
   }
 
   function handleClick(ev) {
     setIsFetching(true);
     ev.preventDefault();
-    console.log(ev.target.innerText);
     const button = ev.target.innerText;
     setLocation(button);
     setCoordinates(JSON.parse(localStorage.getItem(button)));
@@ -108,19 +110,31 @@ function Main({ position }) {
         <Route
           path="/home"
           element={
-            <Home weatherDetails={weatherDetails} fetchStatus={fetchFail} />
+            <Home
+              weatherDetails={weatherDetails}
+              fetchStatus={fetchFail}
+              location={location}
+            />
           }
         />
         <Route
           path="/hourly"
           element={
-            <Hourly weatherDetails={weatherDetails} fetchStatus={fetchFail} />
+            <Hourly
+              weatherDetails={weatherDetails}
+              fetchStatus={fetchFail}
+              location={location}
+            />
           }
         />
         <Route
           path="/daily"
           element={
-            <Daily weatherDetails={weatherDetails} fetchStatus={fetchFail} />
+            <Daily
+              weatherDetails={weatherDetails}
+              fetchStatus={fetchFail}
+              location={location}
+            />
           }
         />
         {/* Redirect every other route to Home */}

@@ -1,11 +1,11 @@
 import "./errorMessage.css";
-function ErrorMessage() {
+function ErrorMessage({ location }) {
   return (
     <div className="error">
-      <h3>
-        Seems like we could not find the location you were looking for. Please
-        try again.
-      </h3>
+      <p>
+        Seems like we could not find <span>{location}</span>.
+      </p>
+      <p>Please try again.</p>
     </div>
   );
 }
