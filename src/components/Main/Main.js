@@ -30,18 +30,19 @@ function Main({ position }) {
   },[])
   //when form is submitted, fetch coordinates
   useEffect(() => {
-    if (location && !locationArray.includes(location) && location!=="current location") {
+    const tempArray = [...locationArray]
+    if (location && !tempArray.includes(location) && location!=="current location") {
       setIsFetching(true);
       setFetchFail(false);
       mapService(location).then((res) => {
         if (res) {
           setCoordinates(res);
-          locationArray.unshift(location);
-          if (locationArray.length > 3) {
-            localStorage.removeItem(locationArray[3]);
-            setLocationArray(locationArray.slice(0,3));
+          tempArray.unshift(location)
+          if (tempArray.length > 3) {
+            localStorage.removeItem(tempArray[3]);
+            setLocationArray(tempArray.slice(0,3));
           } else {
-            setLocationArray(locationArray);
+            setLocationArray(tempArray);
           }
         } else {
           setFetchFail(true);
@@ -49,7 +50,7 @@ function Main({ position }) {
         }
       });
     }
-  }, [location]);
+  }, [location,locationArray]);
   
   //if user allows location, skip fetching coordinates
   useEffect(() => {
