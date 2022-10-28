@@ -17,6 +17,16 @@ function Main({ position }) {
   const [fetchFail, setFetchFail] = useState(false);
   const [locationArray, setLocationArray] = useState([]);
 
+  //Fetch recent searches,if any, from local storage on load
+  useEffect(()=>{
+    const locations = {...localStorage}
+    const fetchFromStorage = []
+    for(const key in locations){
+      fetchFromStorage.push(key)
+    }
+    setLocationArray(fetchFromStorage)
+  },[])
+
   useEffect(() => {
     if (location && !locationArray.includes(location) && location!=="current location") {
       setIsFetching(true);
