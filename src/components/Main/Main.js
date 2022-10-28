@@ -8,6 +8,8 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "../Home/Home";
 import Hourly from "../Hourly/Hourly";
 import Daily from "../Daily/Daily";
+import Form from "../Form/Form";
+import Aside from "../Aside/Aside";
 
 function Main({ position }) {
   const [location, setLocation] = useState("");
@@ -26,7 +28,7 @@ function Main({ position }) {
     }
     setLocationArray(fetchFromStorage)
   },[])
-
+  //when form is submitted, fetch coordinates
   useEffect(() => {
     if (location && !locationArray.includes(location) && location!=="current location") {
       setIsFetching(true);
@@ -34,10 +36,10 @@ function Main({ position }) {
       mapService(location).then((res) => {
         if (res) {
           setCoordinates(res);
-          locationArray.push(location);
+          locationArray.unshift(location);
           if (locationArray.length > 3) {
-            localStorage.removeItem(locationArray[0]);
-            setLocationArray(locationArray.slice(1));
+            localStorage.removeItem(locationArray[3]);
+            setLocationArray(locationArray.slice(0,3));
           } else {
             setLocationArray(locationArray);
           }
@@ -48,7 +50,8 @@ function Main({ position }) {
       });
     }
   }, [location]);
-
+  
+  //if user allows location, skip fetching coordinates
   useEffect(() => {
     if (position && "coords" in position) {
       const coords = {
@@ -61,6 +64,7 @@ function Main({ position }) {
     }
   }, [position]);
 
+  //fetch weather whenever coordinates are available
   useEffect(() => {
     if (coordinates && "lat" in coordinates) {
       const standardCoordinates = {
@@ -74,7 +78,6 @@ function Main({ position }) {
         if (res) {
           setFetchFail(false);
           setWeatherDetails(res);
-          // setLocation("");
           setIsFetching(false);
         } else {
           setFetchFail(true);
@@ -83,6 +86,7 @@ function Main({ position }) {
     }
   }, [coordinates]);
 
+  //handle form submission
   function formSubmitted(ev) {
     ev.preventDefault();
     const query = ev.target[0].value;
@@ -94,6 +98,7 @@ function Main({ position }) {
     }
   }
 
+  //handle clicks on the aside 
   function handleClick(ev) {
     setIsFetching(true);
     ev.preventDefault();
@@ -101,18 +106,10 @@ function Main({ position }) {
     setLocation(button);
     setCoordinates(JSON.parse(localStorage.getItem(button)));
   }
+
   return (
     <main>
-      <form onSubmit={formSubmitted}>
-        <h2>Enter a location:</h2>
-        <input type="text" id="location" placeholder="Toronto,ON" />
-        <label htmlFor="location" className="screen-reader-text">
-          Enter location here
-        </label>
-        <button className="btn" type="submit">
-          Search
-        </button>
-      </form>
+      <Form onSubmit={formSubmitted} />
       {isFetching && <Loader />}
       {!coordinates && !fetchFail && <WelcomeSection />}
       <Routes>
@@ -149,18 +146,7 @@ function Main({ position }) {
         {/* Redirect every other route to Home */}
         <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
-      {locationArray.length > 0 && (
-        <aside>
-          <h3>Recent Searches:</h3>
-          <ul className="unstyled-list">
-            {locationArray.map((item) => (
-              <li key={`item${item}`} onClick={handleClick} className="btn">
-                {item}
-              </li>
-            ))}
-          </ul>
-        </aside>
-      )}
+      {locationArray.length > 0 && <Aside locationArray={locationArray} onClick={handleClick}/>}
     </main>
   );
 }
