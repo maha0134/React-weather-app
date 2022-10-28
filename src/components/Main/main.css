@@ -53,18 +53,7 @@ main {
   text-align: center;
 }
 
-.location-icon{
-  font-size: 3rem;
-  position: fixed;
-  bottom: 1rem;
-  right: 1rem;
-  padding:0.5rem;
-  border-radius: 5rem;
-  box-shadow: 0 0 5px black;
-  background-color: black;
-  color: white;
-  cursor: pointer;
-}
+
 @media only screen and (min-width: 45em) {
   main {
     display: flex;

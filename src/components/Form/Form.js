@@ -1,5 +1,6 @@
 import './form.css'
-export default function Form({onSubmit}) {
+import {BiCurrentLocation} from 'react-icons/bi'
+export default function Form({onSubmit,onClick}) {
   return(
     <form onSubmit={onSubmit}>
         <h2>Enter a location:</h2>
@@ -10,6 +11,7 @@ export default function Form({onSubmit}) {
         <button className="btn" type="submit">
           Search
         </button>
+        <BiCurrentLocation className="location-icon" onClick={onClick}/>
       </form>
   )
 }

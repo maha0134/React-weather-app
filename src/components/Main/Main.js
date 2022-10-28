@@ -127,7 +127,8 @@ function Main({ position }) {
 
   return (
     <main>
-      <Form onSubmit={formSubmitted} />
+      <Form onSubmit={formSubmitted} onClick={showCurrentLocation}/>
+      
       {isFetching && <Loader />}
       {!location && !fetchFail && <WelcomeSection />}
       <Routes>
@@ -165,7 +166,7 @@ function Main({ position }) {
         <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
       {locationArray.length > 0 && <Aside locationArray={locationArray} onClick={handleClick}/>}
-      <BiCurrentLocation className="location-icon" onClick={showCurrentLocation}/>
+      
       {!locationPermission && <LocationPermission />}
     </main>
   );
