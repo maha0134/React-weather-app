@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import NavBar from "./components/NavBar/NavBar";
 import Main from "./components/Main/Main";
 
+
 function App() {
   const [position, setPosition] = useState(null);
 
@@ -17,8 +18,9 @@ function App() {
     function success(position) {
       setPosition(position);
     }
-    function error() {
+    function error(err) {
       setPosition(null);
+      console.log("Location unavailable because:",err.message)
     }
   }, []);
 
@@ -27,6 +29,7 @@ function App() {
       <Header />
       <NavBar />
       <Main position={position} />
+      
     </>
   );
 }

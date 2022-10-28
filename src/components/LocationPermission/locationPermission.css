@@ -1,0 +1,21 @@
+.overlay .permission{
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(0, 255, 174);
+  align-items: center;
+  padding: 5rem 2rem;
+}
+
+.icon-location-overlay{
+  animation: scale 1s forwards;
+  font-size: 3.5rem;
+}
+
+@media only screen and (min-width:45em) {
+  .overlay .permission{
+    padding: 5rem;
+  }
+  .icon-location-overlay{
+    font-size: 5rem;
+  }
+}

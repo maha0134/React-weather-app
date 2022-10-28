@@ -13,8 +13,8 @@ function Daily({ weatherDetails, fetchStatus, location }) {
       desc = desc.charAt(0).toUpperCase() + desc.slice(1);
       const tempObject = {
         dt: dateTime(item.dt, timezone),
-        dayTemp: item.feels_like.day.toFixed(0),
-        nightTemp: item.feels_like.night.toFixed(0),
+        maxTemp: item.temp.max.toFixed(0),
+        minTemp: item.temp.min.toFixed(0),
         desc,
         id: item.weather[0].icon,
       };
@@ -39,7 +39,7 @@ function Daily({ weatherDetails, fetchStatus, location }) {
                   <Image id={item.id} alt={item.desc} />
                   <div className="rest-daily">
                     <h4>
-                      {item.dayTemp}&deg;C | {item.nightTemp}&deg;C
+                      {item.maxTemp}&deg;C | {item.minTemp}&deg;C
                     </h4>
                     <p>{item.desc}</p>
                   </div>

@@ -1,5 +1,5 @@
 form {
-  padding: 1rem;
+  padding: 1rem 1rem 0;
   text-align: center;
   display: flex;
   align-items: center;
@@ -27,9 +27,7 @@ form input {
     padding: 1rem 1rem 0;
     text-align: center;
     flex-direction: row;
-    justify-content: flex-end;
-    align-self: flex-end;
-    grid-area: a;
+    justify-content: center;
   }
 
   form input,

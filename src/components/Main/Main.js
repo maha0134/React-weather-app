@@ -10,6 +10,8 @@ import Hourly from "../Hourly/Hourly";
 import Daily from "../Daily/Daily";
 import Form from "../Form/Form";
 import Aside from "../Aside/Aside";
+import {BiCurrentLocation} from "react-icons/bi"
+import LocationPermission from "../LocationPermission/LocationPermission";
 
 function Main({ position }) {
   const [location, setLocation] = useState("");
@@ -18,6 +20,8 @@ function Main({ position }) {
   const [isFetching, setIsFetching] = useState(false);
   const [fetchFail, setFetchFail] = useState(false);
   const [locationArray, setLocationArray] = useState([]);
+  const [currentLocation,setCurrentLocation] = useState(false);
+  const [locationPermission,setLocationPermission] = useState(true)
 
   //Fetch recent searches,if any, from local storage on load
   useEffect(()=>{
@@ -63,7 +67,7 @@ function Main({ position }) {
       setCoordinates(coords);
       setIsFetching(true);
     }
-  }, [position]);
+  }, [position,currentLocation]);
 
   //fetch weather whenever coordinates are available
   useEffect(() => {
@@ -109,6 +113,18 @@ function Main({ position }) {
     setCoordinates(JSON.parse(localStorage.getItem(button)));
   }
 
+  //location button clicked
+  function showCurrentLocation(){
+    if(position && "coords" in position){
+      setCurrentLocation(!currentLocation)
+    }else{
+      setLocationPermission(false)
+      setTimeout(()=>{
+        setLocationPermission(true)
+      },2000)
+    }
+  }
+
   return (
     <main>
       <Form onSubmit={formSubmitted} />
@@ -149,6 +165,8 @@ function Main({ position }) {
         <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
       {locationArray.length > 0 && <Aside locationArray={locationArray} onClick={handleClick}/>}
+      <BiCurrentLocation className="location-icon" onClick={showCurrentLocation}/>
+      {!locationPermission && <LocationPermission />}
     </main>
   );
 }
