@@ -15,11 +15,11 @@ function Home({ weatherDetails, fetchStatus, location }) {
 
     return (
       <>
-        <h2 className="message">
+        <h3 className="message">
           Showing weather results for <span>{location}</span>
-        </h2>
+        </h3>
         <div className="current-weather" tabIndex="0">
-          <div className="single-file top">
+          <div className="heading">
             <h3>CurrentWeather</h3>
             <h4>{dateTime(dt, timezone).date}</h4>
           </div>

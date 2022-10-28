@@ -25,15 +25,25 @@ h3 {
 }
 
 
-h2.message {
+h3.message {
   padding: 0 1.5rem;
-  margin-top: 0;
+  background-color: transparent;
+  color: black;
+  box-shadow: none;
+  
 }
-h2.message span {
+h3.message span {
   font-style: italic;
   color: rgb(0, 110, 255);
 }
 
+.heading h3,
+h4 {
+  margin: 0;
+}
+.heading h4 {
+  margin: 1rem 0;
+}
 
 .screen-reader-text {
   position: absolute;
@@ -61,11 +71,12 @@ main {
     border-bottom-right-radius: 3rem;
     box-shadow: 0 0 5px;
   }
-  h2.message {
+  h3.message {
     padding: 0 1.5rem;
     margin: 0;
+    align-self: center;
   }
-  h2.message span {
+  h3.message span {
     font-style: italic;
     color: rgb(0, 110, 255);
   }
@@ -82,5 +93,6 @@ main {
     border-radius: 0.25rem;
     overflow: hidden;
     box-shadow: 0 0 10px;
+    padding: 0 0 1.5rem;
   }
 }

@@ -83,9 +83,10 @@ function Main({ position }) {
         } else {
           setFetchFail(true);
         }
+        setCoordinates(null)
       });
     }
-  }, [coordinates]);
+  }, [coordinates,location]);
 
   //handle form submission
   function formSubmitted(ev) {
@@ -112,7 +113,7 @@ function Main({ position }) {
     <main>
       <Form onSubmit={formSubmitted} />
       {isFetching && <Loader />}
-      {!coordinates && !fetchFail && <WelcomeSection />}
+      {!location && !fetchFail && <WelcomeSection />}
       <Routes>
         <Route
           path="/home"

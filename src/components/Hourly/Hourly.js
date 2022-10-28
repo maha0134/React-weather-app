@@ -22,9 +22,9 @@ function Hourly({ weatherDetails, fetchStatus, location }) {
     });
     return (
       <>
-        <h2 className="message">
+        <h3 className="message">
           Showing weather results for <span>{location}</span>
-        </h2>
+        </h3>
         <div className="hourly-weather">
           <div className="heading">
             <h3>Hourly weather</h3>

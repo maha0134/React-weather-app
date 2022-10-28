@@ -2,10 +2,7 @@
   display: block;
   border-radius: 0;
 }
-.daily-weather .heading h3,
-h4 {
-  margin: 0;
-}
+
 .daily-weather .heading h4 {
   margin: 1rem 0;
 }
@@ -20,7 +17,6 @@ h4 {
 
 .daily-weather .unstyled-list li {
   display: flex;
-  /* padding: 0 1.5rem; */
   width: 100%;
   flex-direction: column;
   background: linear-gradient(to left, rgb(6, 255, 184), rgb(29, 221, 202));
@@ -54,6 +50,7 @@ h4 {
     flex-direction: row;
     flex-wrap: nowrap;
     gap: 0.5rem;
+    padding: 1rem 1rem 2rem;
   }
   .daily-weather .heading h3 {
     margin: 0;

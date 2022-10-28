@@ -22,9 +22,9 @@ function Daily({ weatherDetails, fetchStatus, location }) {
     });
     return (
       <>
-        <h2 className="message">
+        <h3 className="message">
           Showing weather results for <span>{location}</span>
-        </h2>
+        </h3>
 
         <div className="daily-weather">
           <div className="heading">
