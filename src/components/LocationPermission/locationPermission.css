@@ -1,7 +1,7 @@
 .overlay .permission{
   display: flex;
   flex-direction: column;
-  background-color: rgb(0, 255, 174);
+  background: linear-gradient(to left, rgb(6, 255, 184), rgb(29, 221, 202));
   align-items: center;
   padding: 5rem 2rem;
 }

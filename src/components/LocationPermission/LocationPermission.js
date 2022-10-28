@@ -1,6 +1,5 @@
 import './locationPermission.css'
 import {ImLocation} from 'react-icons/im'
-import { Navigate } from 'react-router-dom'
 export default function LocationPermission() {
   
   return(

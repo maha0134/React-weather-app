@@ -10,7 +10,6 @@ import Hourly from "../Hourly/Hourly";
 import Daily from "../Daily/Daily";
 import Form from "../Form/Form";
 import Aside from "../Aside/Aside";
-import {BiCurrentLocation} from "react-icons/bi"
 import LocationPermission from "../LocationPermission/LocationPermission";
 
 function Main({ position }) {
@@ -128,7 +127,6 @@ function Main({ position }) {
   return (
     <main>
       <Form onSubmit={formSubmitted} onClick={showCurrentLocation}/>
-      
       {isFetching && <Loader />}
       {!location && !fetchFail && <WelcomeSection />}
       <Routes>
