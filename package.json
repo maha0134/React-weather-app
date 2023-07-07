@@ -14,10 +14,9 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
-  "homepage": "https://maha0134.github.io/mad9135-a2-react-routing",
+  "homepage": "",
   "scripts": {
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
