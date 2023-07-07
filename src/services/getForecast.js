@@ -22,7 +22,6 @@ export default async function getForecast(options, location) {
   const { coord, units } = options;
   const cacheItem = cache.get(location);
   if (cacheItem && !isExpired(cacheItem.current.dt)) {
-    console.log("returned from cache");
     return cacheItem;
   }
   const forecast = await fetchForecast({
@@ -31,7 +30,6 @@ export default async function getForecast(options, location) {
   });
   if (forecast) {
     cache.set(location, forecast);
-    console.log(cache);
     return forecast;
   } else {
     return null;
@@ -55,7 +53,6 @@ export default async function getForecast(options, location) {
  */
 async function fetchForecast({ coord: { lat, lon }, units }) {
   const url = `${process.env.REACT_APP_BASE_URL}?lat=${lat}&lon=${lon}&units=${units}&appid=${process.env.REACT_APP_API_KEY}`;
-  console.log(url);
   let response;
   try {
     response = await fetch(url);

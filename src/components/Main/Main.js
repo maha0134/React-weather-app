@@ -19,31 +19,35 @@ function Main({ position }) {
   const [isFetching, setIsFetching] = useState(false);
   const [fetchFail, setFetchFail] = useState(false);
   const [locationArray, setLocationArray] = useState([]);
-  const [currentLocation,setCurrentLocation] = useState(false);
-  const [locationPermission,setLocationPermission] = useState(true)
+  const [currentLocation, setCurrentLocation] = useState(false);
+  const [locationPermission, setLocationPermission] = useState(true);
 
   //Fetch recent searches,if any, from local storage on load
-  useEffect(()=>{
-    const locations = {...localStorage}
-    const fetchFromStorage = []
-    for(const key in locations){
-      fetchFromStorage.push(key)
+  useEffect(() => {
+    const locations = { ...localStorage };
+    const fetchFromStorage = [];
+    for (const key in locations) {
+      fetchFromStorage.push(key);
     }
-    setLocationArray(fetchFromStorage)
-  },[])
+    setLocationArray(fetchFromStorage);
+  }, []);
   //when form is submitted, fetch coordinates
   useEffect(() => {
-    const tempArray = [...locationArray]
-    if (location && !tempArray.includes(location) && location!=="current location") {
+    const tempArray = [...locationArray];
+    if (
+      location &&
+      !tempArray.includes(location) &&
+      location !== "current location"
+    ) {
       setIsFetching(true);
       setFetchFail(false);
       mapService(location).then((res) => {
         if (res) {
           setCoordinates(res);
-          tempArray.unshift(location)
+          tempArray.unshift(location);
           if (tempArray.length > 3) {
             localStorage.removeItem(tempArray[3]);
-            setLocationArray(tempArray.slice(0,3));
+            setLocationArray(tempArray.slice(0, 3));
           } else {
             setLocationArray(tempArray);
           }
@@ -53,8 +57,8 @@ function Main({ position }) {
         }
       });
     }
-  }, [location,locationArray]);
-  
+  }, [location, locationArray]);
+
   //if user allows location, skip fetching coordinates
   useEffect(() => {
     if (position && "coords" in position) {
@@ -62,11 +66,11 @@ function Main({ position }) {
         lat: position.coords.latitude,
         lon: position.coords.longitude,
       };
-      setLocation("current location")
+      setLocation("current location");
       setCoordinates(coords);
       setIsFetching(true);
     }
-  }, [position,currentLocation]);
+  }, [position, currentLocation]);
 
   //fetch weather whenever coordinates are available
   useEffect(() => {
@@ -85,11 +89,12 @@ function Main({ position }) {
           setIsFetching(false);
         } else {
           setFetchFail(true);
+          setIsFetching(false);
         }
-        setCoordinates(null)
+        setCoordinates(null);
       });
     }
-  }, [coordinates,location]);
+  }, [coordinates, location]);
 
   //handle form submission
   function formSubmitted(ev) {
@@ -103,7 +108,7 @@ function Main({ position }) {
     }
   }
 
-  //handle clicks on the aside 
+  //handle clicks on the aside
   function handleClick(ev) {
     setIsFetching(true);
     ev.preventDefault();
@@ -113,20 +118,20 @@ function Main({ position }) {
   }
 
   //location button clicked
-  function showCurrentLocation(){
-    if(position && "coords" in position){
-      setCurrentLocation(!currentLocation)
-    }else{
-      setLocationPermission(false)
-      setTimeout(()=>{
-        setLocationPermission(true)
-      },2000)
+  function showCurrentLocation() {
+    if (position && "coords" in position) {
+      setCurrentLocation(!currentLocation);
+    } else {
+      setLocationPermission(false);
+      setTimeout(() => {
+        setLocationPermission(true);
+      }, 2000);
     }
   }
 
   return (
     <main>
-      <Form onSubmit={formSubmitted} onClick={showCurrentLocation}/>
+      <Form onSubmit={formSubmitted} onClick={showCurrentLocation} />
       {isFetching && <Loader />}
       {!location && !fetchFail && <WelcomeSection />}
       <Routes>
@@ -163,8 +168,10 @@ function Main({ position }) {
         {/* Redirect every other route to Home */}
         <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
-      {locationArray.length > 0 && <Aside locationArray={locationArray} onClick={handleClick}/>}
-      
+      {locationArray.length > 0 && (
+        <Aside locationArray={locationArray} onClick={handleClick} />
+      )}
+
       {!locationPermission && <LocationPermission />}
     </main>
   );
