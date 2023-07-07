@@ -1,6 +1,6 @@
 // 'use strict';
-const BASE_URL = "https://api.openweathermap.org/data/2.5/onecall";
-const API_KEY = "15487eec3e5e8f7846e151279d9bbd6b";
+// const BASE_URL = "https://api.openweathermap.org/data/2.5/onecall";
+// const API_KEY = "15487eec3e5e8f7846e151279d9bbd6b";
 const cache = new Map();
 
 /**
@@ -54,13 +54,14 @@ export default async function getForecast(options, location) {
  * @param {APIOptions} options
  */
 async function fetchForecast({ coord: { lat, lon }, units }) {
-  const url = `${BASE_URL}?lat=${lat}&lon=${lon}&units=${units}&appid=${API_KEY}`;
+  const url = `${process.env.REACT_APP_BASE_URL}?lat=${lat}&lon=${lon}&units=${units}&appid=${process.env.REACT_APP_API_KEY}`;
+  console.log(url);
   let response;
   try {
     response = await fetch(url);
     if (!response.ok) throw new Error(response.statusText);
   } catch (err) {
-    console.log(err.statusText);
+    console.log(err);
     return null;
   }
   return response.json();

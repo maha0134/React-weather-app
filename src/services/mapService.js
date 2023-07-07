@@ -1,8 +1,5 @@
-const API_TOKEN = "pk.afdc0278e6a7e633286ed32bc65db9fe";
-const BASE_URL = "https://us1.locationiq.com/v1";
-
 async function mapService(location) {
-  const url = `${BASE_URL}/search?key=${API_TOKEN}&q=${location}&format=json`;
+  const url = `${process.env.REACT_APP_OW_BASE_URL}/search?key=${process.env.REACT_APP_OW_API_TOKEN}&q=${location}&format=json`;
   const fetchFromLocalStorage = localStorage.getItem(location);
   if (fetchFromLocalStorage) {
     return JSON.parse(fetchFromLocalStorage);
