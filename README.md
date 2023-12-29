@@ -7,4 +7,4 @@ The website uses React Router to perform `Client side routing` to provide a very
 
 The website caches searched location coordinates so as to make less calls to the locationIQ API.
 
-Checkout the React website [here](https://maha0134.github.io/mad9135-a2-react-routing/#/home).
+Checkout the React website [here](https://react-weather-app-roan-one.vercel.app/#/home).
