@@ -1,6 +1,4 @@
 // 'use strict';
-// const BASE_URL = "https://api.openweathermap.org/data/2.5/onecall";
-// const API_KEY = "15487eec3e5e8f7846e151279d9bbd6b";
 const cache = new Map();
 
 /**
