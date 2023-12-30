@@ -6,6 +6,7 @@ function Header() {
       <h1>
         <Link to="/">Weather App</Link>
       </h1>
+      <div className="highlight">Open Weather API student access expired!!!</div>
     </header>
   );
 }
