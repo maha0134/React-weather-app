@@ -1,4 +1,4 @@
-# React Weather App (Open Weather Student access expired so weather won't load)
+<!-- # React Weather App (Open Weather Student access expired so weather won't load) -->
 <img src="/public/react-weather.png" align="left" width="500" alt="screenshot of react website">
 
 A weather app created using `React.js` that uses **locationIQ API** to fetch coordinates and **Weather API** to fetch `current`, `hourly` and `daily weather` details for any searched location.
